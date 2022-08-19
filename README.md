@@ -1,2 +1,17 @@
-# CommandSpy-skript-
-CommandSpy system for minecraft server. Created with skript.
+
+# CommandSpy skript
+
+
+
+## Usage
+
+- Insert CommandSpy.sk into skript folder
+- Type /sk reload cmdspy.sk
+- Type /cmdspy to enable CommanSpy
+
+
+
+## Dependencies
+
+[skript](https://github.com/SkriptLang/Skript/releases)
+
