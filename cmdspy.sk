@@ -1,0 +1,38 @@
+options:
+    #             CONFIG YOU CAN CHANGE:
+    #---------------------------------------------------------------------
+    permission: cmdspy.use # permission for /ac and view admin chat
+    prefix: &8[&6CMDSPY&8] &r
+    #---------------------------------------------------------------------
+
+    # messages:
+
+    noperm: &cYou dont have permission! # no permission message
+    noplayer: &cExecutable from player only! # If command executor is console or RCON
+    enabled: &7You &2enabled &7commandspy. # Message when you enable commandspy
+    disabled: &7You &4disabled &7commandspy. # Message when you disable commandspy
+
+# code:
+
+command /commandspy:
+    aliases: /cmdspy
+    trigger:
+        if executor is player:
+            if player has permission "{@permission}":
+                if {cmdspy.status::%player%} is true:
+                    set {cmdspy.status::%player%} to false
+                    send "{@prefix}{@disabled}"
+                else:
+                    set {cmdspy.status::%player%} to true
+                    send "{@prefix}{@enabled}"
+            else:
+                send "{@prefix}{@noperm}"
+        else:
+            send "{@prefix}{@noplayer}" to sender
+
+on command:
+    loop all players:
+        if {cmdspy.status::%loop-player%} is true:
+            if loop-player is not sender:
+                if command is not "l", "login", "reg", "register", "cp" or "changepassword":
+                    send "{@prefix}&b%sender% &7» &r/%full command%" to loop-player
